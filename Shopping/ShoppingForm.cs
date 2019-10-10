@@ -82,7 +82,7 @@ namespace Shopping
                decimal.Parse(varansPrisTextBox.Text)
                );
 
-            //kontrollera om inmatadvara redan finns. Om den finns. Uppdatera priset.
+            //kontrollera om inmatad vara redan finns. Om den finns. Uppdatera priset.
             var found = varorList.Any(x => x.Name.ToLower() == model.Name.ToLower());
 
             for (int i = 0; i < varorList.Count; i++)
