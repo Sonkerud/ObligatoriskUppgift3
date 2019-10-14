@@ -20,22 +20,24 @@
             <Button x:Name="AddVaraButton" Content="Lägg till vara" Margin="132,5,517,5" Padding="10" Click="AddVaraButton_Click" />
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="5" Width="123" ><Run Text="Inköpslista:"/></TextBlock>
-                <TextBlock x:Name="employeeId" Margin="5"  />
+                <TextBlock x:Name="inkopsLista" Margin="5"  />
             </StackPanel>
             <ListBox Height="150" Margin="47,0,517,0"/>
-            <Button x:Name="createEmployeeIdButton_Copy" Content="Ta bort vara" Margin="132,5,517,5" Padding="10" Click="createEmployeeIdButton_Click" />
+            <Button x:Name="deleteVara" Content="Ta bort vara" Margin="132,5,517,5" Padding="10" Click="deleteVara_Click"/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Summa: " Margin="5" Width="129" />
-                <TextBox x:Name="summaTextBox" MinWidth="100" Margin="5" Width="127"  />
+                <TextBlock Text="Summa: " Margin="5"  />
+                <TextBlock x:Name="summaTextBox" Margin="5" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Dyraste vara: " Margin="5" Width="131" />
-                <TextBox x:Name="dyrasteTextBox" MinWidth="100" Margin="5" Width="126"  />
+                <TextBlock Text="Dyraste Vara: " Margin="5" />
+                <TextBlock x:Name="dyrasteVara" Margin="5"  />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Billigaste vara: " Margin="5" />
-                <TextBox x:Name="billigasteTextBox" MinWidth="100" Margin="5" Width="125"  />
+                <TextBlock Text="Billigaste Vara: " Margin="5" />
+                <TextBlock x:Name="billigasteVara" Margin="5"  />
             </StackPanel>
+            <StackPanel Orientation="Horizontal"/>
+            <StackPanel Orientation="Horizontal"/>
 
         </StackPanel>
     </Grid>

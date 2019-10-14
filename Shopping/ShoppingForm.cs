@@ -15,6 +15,9 @@ namespace Shopping
     public partial class shoppingForm : Form
     {
         private static List<VarorModel> varorList = new List<VarorModel>();
+
+        var hej = new List<Lista<string, double>>();
+
         BindingSource shoppingListListBoxBinding = new BindingSource();
         BindingSource dyrasteBinding = new BindingSource();
         BindingSource billigasteBinding = new BindingSource();
@@ -83,7 +86,6 @@ namespace Shopping
                 DataBinding(varorList);
             }
         }
-        
 
         //Validate Input in Name and Price TextBox
         public bool ValidateInput(string name, string price)

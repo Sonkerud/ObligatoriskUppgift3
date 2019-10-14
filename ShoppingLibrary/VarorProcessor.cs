@@ -38,11 +38,8 @@ namespace ShoppingLibrary
         {
             list.Remove((VarorModel)listBox.SelectedItem);
         }
-        public void ClearTextFields(TextBox a, TextBox b)
-        {
-            a.Text = "";
-            b.Text = "";
-        }
+        
+
         //Calculate most expensive vara
         public static VarorModel MostExpensive(List<VarorModel> list)
         {

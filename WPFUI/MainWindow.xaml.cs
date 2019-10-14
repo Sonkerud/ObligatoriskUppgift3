@@ -30,7 +30,12 @@ namespace WPFUI
 
         private void AddVaraButton_Click(object sender, RoutedEventArgs e)
         {
-            VarorProcessor.AddVara(varorList,varansPrisTextBox.Text,varansNamnTextBox.Text);
+            dyrasteVara.Text = "Dyrt";
+        }
+
+        private void deleteVara_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
