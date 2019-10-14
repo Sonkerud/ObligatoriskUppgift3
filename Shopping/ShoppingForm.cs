@@ -19,26 +19,24 @@ namespace Shopping
         BindingSource dyrasteBinding = new BindingSource();
         BindingSource billigasteBinding = new BindingSource();
         BindingSource summaBinding = new BindingSource();
-        
 
         public shoppingForm()
         {
             InitializeComponent();
         }
-
         
-        public void DataBinding() {
+        public void DataBinding(List<VarorModel> list) {
 
-            shoppingListListBoxBinding.DataSource = varorList; 
+            shoppingListListBoxBinding.DataSource = list; 
             shoppingListListBox.DataSource = shoppingListListBoxBinding;
             
             shoppingListListBox.ValueMember = "Display";
             shoppingListListBox.DisplayMember = "Display";
 
-            dyrasteBinding.DataSource = Dyraste();
+            dyrasteBinding.DataSource = VarorProcessor.MostExpensive(list);
             dyrasteListBox.DataSource = dyrasteBinding;
 
-            billigasteBinding.DataSource = Billigaste();
+            billigasteBinding.DataSource = VarorProcessor.Cheapest(list);
             billigasteListBox.DataSource = billigasteBinding;
 
             dyrasteListBox.ValueMember = "Display";
@@ -48,125 +46,67 @@ namespace Shopping
             billigasteListBox.DisplayMember = "Display";
 
             
-            summaBinding.DataSource = varorList.Sum(item => item.Price);
+            summaBinding.DataSource = list.Sum(item => item.Price);
             summaListBox.DataSource = summaBinding;
 
             shoppingListListBoxBinding.ResetBindings(false);
             dyrasteBinding.ResetBindings(false);
             billigasteBinding.ResetBindings(false);
-                      
-
         }
-
 
         private void AddVaraButton_Click(object sender, EventArgs e)
         {
-            //Kontrollera inmatning
-            bool inmatning = KontrolleraInmatning();
+            CreateVara();
+         }
+        private void DeleteVaraButton_Click(object sender, EventArgs e)
+        {
+            VarorProcessor.DeleteVara(varorList, shoppingListListBox);
+            DataBinding(varorList);
+        }
+ 
+        public void ClearTextFields(TextBox a, TextBox b)
+        {
+            a.Text = "";
+            b.Text = "";
+        }
+
+        public void CreateVara()
+        {
+            //Validate Input
+            bool inmatning = ValidateInput(varansNamnTextBox.Text, varansPrisTextBox.Text);
 
             if (inmatning)
             {
-
-                //Lägg till vara. Ta värden från textfält
-                AddVara();
-                
-                DataBinding();
-
+                //Add new vara
+                VarorProcessor.AddVara(varorList, varansNamnTextBox.Text, varansPrisTextBox.Text);
+                ClearTextFields(varansNamnTextBox, varansPrisTextBox);
+                DataBinding(varorList);
             }
-         }
-
-        public void AddVara()
-        {
-            VarorModel model = new VarorModel(
-               varansNamnTextBox.Text,
-               decimal.Parse(varansPrisTextBox.Text)
-               );
-
-            //kontrollera om inmatad vara redan finns. Om den finns. Uppdatera priset.
-            var found = varorList.Any(x => x.Name.ToLower() == model.Name.ToLower());
-
-            for (int i = 0; i < varorList.Count; i++)
-            {
-                if (varorList[i].Name.ToLower() == model.Name.ToLower())
-                {
-                    varorList[i].Price = model.Price;
-                }
-            }
-
-            //Om den inte finns - Lägg till i listan.
-            if (!found)
-            {
-                varorList.Add(model);
-             }
-
-            //Rensa textfält
-            varansNamnTextBox.Text = "";
-            varansPrisTextBox.Text = "";
         }
+        
 
-        private void TaBortVaraButton_Click(object sender, EventArgs e)
+        //Validate Input in Name and Price TextBox
+        public bool ValidateInput(string name, string price)
         {
-            VarorModel selectedVara = (VarorModel)shoppingListListBox.SelectedItem;
-            varorList.Remove(selectedVara);
-
-            DataBinding();
-
-        }
-
-        public bool KontrolleraInmatning()
-        {
-            if (varansNamnTextBox.Text.Length == 0)
+            if (name.Length == 0)
             {
                 MessageBox.Show("Fyll i namn på vara");
                 return false;
             }
 
-            else if (varansPrisTextBox.Text.Length == 0)
+            else if (price.Length == 0)
             {
                 MessageBox.Show("Fyll i pris på vara");
                 return false;
-            } else
+            }
+            else
             {
                 return true;
             }
             
         }
 
-        //Räkna ut dyraste och billigaste vara
-        public VarorModel Dyraste()
-        {
-            decimal maxPrice = varorList.Max(t => t.Price);
-            VarorModel model = new VarorModel();
-
-            for (int i = 0; i < varorList.Count; i++)
-            {
-                if (varorList[i].Price == maxPrice)
-                {
-                    model =  varorList[i];
-                }
-            }
-
-            return model;
-
-            
-        }
-        public VarorModel Billigaste()
-        {
-            decimal minPrice = varorList.Min(t => t.Price);
-            VarorModel model = new VarorModel();
-
-            for (int i = 0; i < varorList.Count; i++)
-            {
-                if (varorList[i].Price == minPrice)
-                {
-                    model = varorList[i];
-                }
-            }
-
-            return model;
-        }
-
-        //Endast siffror i rutan för pris
+        //Only allow numbers in Price Textbox
         private void VaransPrisTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
@@ -174,10 +114,15 @@ namespace Shopping
             {
                 e.Handled = true;
             }
-
-
         }
 
-        
+        // Press Enter after price in Price textbox activates "AddVara()"
+        private void VaransPrisTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                CreateVara();
+            }
+        }
     }
 }

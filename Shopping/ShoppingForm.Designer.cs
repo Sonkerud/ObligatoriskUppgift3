@@ -78,6 +78,7 @@
             this.varansPrisTextBox.Size = new System.Drawing.Size(100, 20);
             this.varansPrisTextBox.TabIndex = 3;
             this.varansPrisTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.VaransPrisTextBox_KeyPress);
+            this.varansPrisTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.VaransPrisTextBox_KeyUp);
             // 
             // varansNamnLabel
             // 
@@ -159,7 +160,7 @@
             this.taBortVaraButton.TabIndex = 14;
             this.taBortVaraButton.Text = "Ta bort";
             this.taBortVaraButton.UseVisualStyleBackColor = true;
-            this.taBortVaraButton.Click += new System.EventHandler(this.TaBortVaraButton_Click);
+            this.taBortVaraButton.Click += new System.EventHandler(this.DeleteVaraButton_Click);
             // 
             // summaListBox
             // 

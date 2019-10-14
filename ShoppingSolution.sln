@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping", "Shopping\Shoppi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingLibrary", "ShoppingLibrary\ShoppingLibrary.csproj", "{2A8CACA5-1F5C-420B-8A04-C3BCB38AF603}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFUI", "WPFUI\WPFUI.csproj", "{065FD77C-58F2-4483-89AB-D76F9182842B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2A8CACA5-1F5C-420B-8A04-C3BCB38AF603}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A8CACA5-1F5C-420B-8A04-C3BCB38AF603}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A8CACA5-1F5C-420B-8A04-C3BCB38AF603}.Release|Any CPU.Build.0 = Release|Any CPU
+		{065FD77C-58F2-4483-89AB-D76F9182842B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{065FD77C-58F2-4483-89AB-D76F9182842B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{065FD77C-58F2-4483-89AB-D76F9182842B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{065FD77C-58F2-4483-89AB-D76F9182842B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
