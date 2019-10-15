@@ -42,21 +42,18 @@ namespace WPFUI
             {
                 var model = VarorProcessor.AddVara(bindingList, varansNamnTextBox.Text, varansPrisTextBox.Text);
 
-               
-
-
-                for (int i = 0; i < bindingList.Count; i++)
-                {
-                    if ((varorListBox.Items[i] as VarorModel).Name.ToLower() == varansNamnTextBox.Text.ToLower())
-                    {
-                        (varorListBox.Items[i] as VarorModel).Price = int.Parse(varansPrisTextBox.Text);
-                    }
-                }
+                //for (int i = 0; i < bindingList.Count-1; i++)
+                //{
+                //    if ((varorListBox.Items[i] as VarorModel).Name.ToLower() == varansNamnTextBox.Text.ToLower())
+                //    {
+                //        (varorListBox.Items[i] as VarorModel).Price = int.Parse(varansPrisTextBox.Text);
+                //    }
+                //}
                 DataBinding();
                 ClearTextFields(varansNamnTextBox, varansPrisTextBox);
+                var newList = bindingList.Where(x => x.Price > 0);
+                varorListBox.ItemsSource = newList;
             }
-              
-
         }
 
         private void DeleteVara_Click(object sender, RoutedEventArgs e)
@@ -77,11 +74,10 @@ namespace WPFUI
             varorListBox.DisplayMemberPath = "Display";
 
             var mostExpensive = VarorProcessor.MostExpensive(bindingList);
-            dyrasteVara.Text = $"{mostExpensive.Name} {mostExpensive.Price} kr";
+            dyrasteVara.Text = $"{mostExpensive.Name} - Pris: {mostExpensive.Price} kr";
             var cheapest = VarorProcessor.Cheapest(bindingList);
-            billigasteVara.Text = $"{cheapest.Name} {cheapest.Price} kr";
+            billigasteVara.Text = $"{cheapest.Name} - Pris: {cheapest.Price} kr";
             summaTextBox.Text = $"{bindingList.Sum(x => x.Price).ToString()} kr";
-                                 
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
