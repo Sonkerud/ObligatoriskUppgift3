@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -24,10 +25,12 @@ namespace WPFUI
     public partial class MainWindow : Window
     {
         private static ObservableCollection<VarorModel> obsList = new ObservableCollection<VarorModel>();
+        private static BindingList<VarorModel> bindingList = new BindingList<VarorModel>();
 
         public MainWindow()
         {
             InitializeComponent();
+            varorListBox.ItemsSource = bindingList;
         }
 
         private void AddVaraButton_Click(object sender, RoutedEventArgs e)
@@ -35,17 +38,30 @@ namespace WPFUI
 
             bool inmatning = ValidateInputClass.ValidateInput(varansNamnTextBox.Text, varansPrisTextBox.Text);
 
-            if (inmatning) 
-            { 
-                var model = VarorProcessor.AddVara(obsList, varansNamnTextBox.Text, varansPrisTextBox.Text);
+            if (inmatning)
+            {
+                var model = VarorProcessor.AddVara(bindingList, varansNamnTextBox.Text, varansPrisTextBox.Text);
+
+               
+
+
+                for (int i = 0; i < bindingList.Count; i++)
+                {
+                    if ((varorListBox.Items[i] as VarorModel).Name.ToLower() == varansNamnTextBox.Text.ToLower())
+                    {
+                        (varorListBox.Items[i] as VarorModel).Price = int.Parse(varansPrisTextBox.Text);
+                    }
+                }
                 DataBinding();
                 ClearTextFields(varansNamnTextBox, varansPrisTextBox);
             }
+              
+
         }
 
         private void DeleteVara_Click(object sender, RoutedEventArgs e)
         {
-            VarorProcessor.DeleteVara(obsList, varorListBox);
+            VarorProcessor.DeleteVara(bindingList, varorListBox);
             DataBinding();
         }
 
@@ -57,14 +73,14 @@ namespace WPFUI
 
         public void DataBinding()
         {
-            varorListBox.ItemsSource = obsList;
+            varorListBox.ItemsSource = bindingList;
             varorListBox.DisplayMemberPath = "Display";
 
-            var mostExpensive = VarorProcessor.MostExpensive(obsList);
+            var mostExpensive = VarorProcessor.MostExpensive(bindingList);
             dyrasteVara.Text = $"{mostExpensive.Name} {mostExpensive.Price} kr";
-            var cheapest = VarorProcessor.Cheapest(obsList);
+            var cheapest = VarorProcessor.Cheapest(bindingList);
             billigasteVara.Text = $"{cheapest.Name} {cheapest.Price} kr";
-            summaTextBox.Text = $"{obsList.Sum(x => x.Price).ToString()} kr";
+            summaTextBox.Text = $"{bindingList.Sum(x => x.Price).ToString()} kr";
                                  
         }
 

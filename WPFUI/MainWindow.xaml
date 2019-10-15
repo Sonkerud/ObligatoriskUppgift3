@@ -22,7 +22,7 @@
                 <TextBlock Margin="5" Width="123" ><Run Text="Inköpslista:"/></TextBlock>
                 <TextBlock x:Name="inkopsLista" Margin="5"  />
             </StackPanel>
-            <ListBox x:Name ="varorListBox"   Height="150" Margin="5"/>
+            <ListBox Name ="varorListBox" DisplayMemberPath="Display" Height="150" Margin="5"/>
             <Button x:Name="deleteVara" Content="Ta bort vara" Margin="132,5,33,5" Padding="10" Click="DeleteVara_Click"/>
 
             <StackPanel Orientation="Horizontal">

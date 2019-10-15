@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace ShoppingLibrary
 
         }
 
-        public static VarorModel AddVara(ObservableCollection<VarorModel> list, string name, string price)
+        public static VarorModel AddVara(BindingList<VarorModel> list, string name, string price)
         {
             VarorModel model = new VarorModel(
                name,
@@ -67,7 +68,7 @@ namespace ShoppingLibrary
 
         }
 
-        public static void DeleteVara(ObservableCollection<VarorModel> list, System.Windows.Controls.ListBox listBox)
+        public static void DeleteVara(BindingList<VarorModel> list, System.Windows.Controls.ListBox listBox)
         {
             list.Remove((VarorModel)listBox.SelectedItem);
         }
@@ -101,7 +102,7 @@ namespace ShoppingLibrary
             return model;
 
         }
-        public static VarorModel MostExpensive(ObservableCollection<VarorModel> list)
+        public static VarorModel MostExpensive(BindingList<VarorModel> list)
         {
             decimal maxPrice = 0;
             VarorModel model = new VarorModel("Tom lista", 0);
@@ -148,7 +149,7 @@ namespace ShoppingLibrary
             }
             return model;
         }
-        public static VarorModel Cheapest(ObservableCollection<VarorModel> list)
+        public static VarorModel Cheapest(BindingList<VarorModel> list)
         {
             decimal minPrice = 0;
             VarorModel model = new VarorModel("Tom lista", 0);

@@ -41,7 +41,6 @@ namespace ShoppingLibrary
         }
 
 
-
         public VarorModel(string namn, decimal pris)
         {
             Price = pris;
