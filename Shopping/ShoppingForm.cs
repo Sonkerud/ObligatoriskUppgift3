@@ -16,8 +16,6 @@ namespace Shopping
     {
         private static List<VarorModel> varorList = new List<VarorModel>();
 
-        var hej = new List<Lista<string, double>>();
-
         BindingSource shoppingListListBoxBinding = new BindingSource();
         BindingSource dyrasteBinding = new BindingSource();
         BindingSource billigasteBinding = new BindingSource();
@@ -76,7 +74,7 @@ namespace Shopping
         public void CreateVara()
         {
             //Validate Input
-            bool inmatning = ValidateInput(varansNamnTextBox.Text, varansPrisTextBox.Text);
+            bool inmatning = ValidateInputClass.ValidateInput(varansNamnTextBox.Text, varansPrisTextBox.Text);
 
             if (inmatning)
             {
@@ -87,27 +85,7 @@ namespace Shopping
             }
         }
 
-        //Validate Input in Name and Price TextBox
-        public bool ValidateInput(string name, string price)
-        {
-            if (name.Length == 0)
-            {
-                MessageBox.Show("Fyll i namn på vara");
-                return false;
-            }
-
-            else if (price.Length == 0)
-            {
-                MessageBox.Show("Fyll i pris på vara");
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-            
-        }
-
+     
         //Only allow numbers in Price Textbox
         private void VaransPrisTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {

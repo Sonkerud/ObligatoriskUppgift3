@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidateInputClass.cs" />
     <Compile Include="VarorModel.cs" />
     <Compile Include="VarorProcessor.cs" />
   </ItemGroup>

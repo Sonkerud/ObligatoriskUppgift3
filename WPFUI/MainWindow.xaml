@@ -4,26 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFUI"
-        mc:Ignorable="d" FontSize="20"
-        Title="Inköpslista" Height="579.174" Width="798.532">
-    <Grid>
-        <StackPanel Orientation="Vertical">
+        mc:Ignorable="d" FontSize="16"
+        Title="Inköpslista" Height="579.174" Width="472.237">
+    <Grid Margin="0,0,2,0">
+        <StackPanel Orientation="Vertical" Margin="0,0,176,0">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Varans namn: " Margin="5" />
                 <TextBox x:Name="varansNamnTextBox" MinWidth="100" Margin="5" Width="137"  />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Varans pris: " Margin="5" Width="123" />
-                <TextBox x:Name="varansPrisTextBox" MinWidth="100" Margin="5" Width="138"  />
+                <TextBlock Text="Varans pris: " Margin="5" Width="100" />
+                <TextBox x:Name="varansPrisTextBox" PreviewTextInput="NumberValidationTextBox" MinWidth="100" Margin="5" Width="131"  />
                 <TextBlock Margin="5" ><Run Text="kr"/><Run Text=" "/></TextBlock>
             </StackPanel>
-            <Button x:Name="AddVaraButton" Content="Lägg till vara" Margin="132,5,517,5" Padding="10" Click="AddVaraButton_Click" />
+            <Button x:Name="AddVaraButton" Content="Lägg till vara" Margin="132,5,0,5" Padding="10" Click="AddVaraButton_Click" HorizontalAlignment="Left" Width="121" />
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="5" Width="123" ><Run Text="Inköpslista:"/></TextBlock>
                 <TextBlock x:Name="inkopsLista" Margin="5"  />
             </StackPanel>
-            <ListBox Height="150" Margin="47,0,517,0"/>
-            <Button x:Name="deleteVara" Content="Ta bort vara" Margin="132,5,517,5" Padding="10" Click="deleteVara_Click"/>
+            <ListBox x:Name ="varorListBox"   Height="150" Margin="5"/>
+            <Button x:Name="deleteVara" Content="Ta bort vara" Margin="132,5,33,5" Padding="10" Click="DeleteVara_Click"/>
+
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Summa: " Margin="5"  />
                 <TextBlock x:Name="summaTextBox" Margin="5" />
