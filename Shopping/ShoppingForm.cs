@@ -26,7 +26,7 @@ namespace Shopping
             InitializeComponent();
         }
         
-        public void DataBinding(List<VarorModel> list) {
+        private void DataBinding(List<VarorModel> list) {
 
             shoppingListListBoxBinding.DataSource = list; 
             shoppingListListBox.DataSource = shoppingListListBoxBinding;
@@ -46,8 +46,7 @@ namespace Shopping
             billigasteListBox.ValueMember = "Display";
             billigasteListBox.DisplayMember = "Display";
 
-            
-            summaBinding.DataSource = list.Sum(item => item.Price);
+            summaBinding.DataSource = VarorProcessor.Sum(list);
             summaListBox.DataSource = summaBinding;
 
             shoppingListListBoxBinding.ResetBindings(false);
@@ -61,17 +60,17 @@ namespace Shopping
          }
         private void DeleteVaraButton_Click(object sender, EventArgs e)
         {
-            VarorProcessor.DeleteVara(varorList, shoppingListListBox);
-            DataBinding(varorList);
+            VarorProcessor.DeleteVara(VarorModel.listOfVaror, shoppingListListBox);
+            DataBinding(VarorModel.listOfVaror);
         }
  
-        public void ClearTextFields(TextBox a, TextBox b)
+        private void ClearTextFields(TextBox a, TextBox b)
         {
             a.Text = "";
             b.Text = "";
         }
 
-        public void CreateVara()
+        private void CreateVara()
         {
             //Validate Input
             bool inmatning = ValidateInputClass.ValidateInput(varansNamnTextBox.Text, varansPrisTextBox.Text);
@@ -79,9 +78,9 @@ namespace Shopping
             if (inmatning)
             {
                 //Add new vara
-                VarorProcessor.AddVara(varorList, varansNamnTextBox.Text, varansPrisTextBox.Text);
+                VarorProcessor.AddVara(VarorModel.listOfVaror, varansNamnTextBox.Text, varansPrisTextBox.Text);
                 ClearTextFields(varansNamnTextBox, varansPrisTextBox);
-                DataBinding(varorList);
+                DataBinding(VarorModel.listOfVaror);
             }
         }
 

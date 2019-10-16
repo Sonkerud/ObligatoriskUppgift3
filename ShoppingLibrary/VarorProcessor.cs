@@ -12,7 +12,7 @@ namespace ShoppingLibrary
 {
     public class VarorProcessor
     {
-        public static VarorModel AddVara(List<VarorModel> list, string name, string price)
+        public static void AddVara(List<VarorModel> list, string name, string price)
         {
             VarorModel model = new VarorModel(
                name,
@@ -30,45 +30,17 @@ namespace ShoppingLibrary
                 }
             }
 
-            //If if doesn't exist. Add new Vara.
+            //If if doesn't exist: Add new Vara.
             if (!found)
             {
                 model.Name = model.Name.First().ToString().ToUpper() + model.Name.Substring(1).ToLower();
                 list.Add(model);
             }
-            return model;
+            
 
         }
 
-        public static VarorModel AddVara(BindingList<VarorModel> list, string name, string price)
-        {
-            VarorModel model = new VarorModel(
-               name,
-               decimal.Parse(price)
-               );
-
-            //Control if new Vara already exists. If it does - update price.
-            var found = list.Any(x => x.Name.ToLower() == model.Name.ToLower());
-
-            for (int i = 0; i < list.Count; i++)
-            {
-                if (list[i].Name.ToLower() == model.Name.ToLower())
-                {
-                    list[i].Price = model.Price;
-                }
-            }
-
-            //If if doesn't exist. Add new Vara.
-            if (!found)
-            {
-                model.Name = model.Name.First().ToString().ToUpper() + model.Name.Substring(1).ToLower();
-                list.Add(model);
-            }
-            return model;
-
-        }
-
-        public static void DeleteVara(BindingList<VarorModel> list, System.Windows.Controls.ListBox listBox)
+        public static void DeleteVara(List<VarorModel> list, System.Windows.Controls.ListBox listBox)
         {
             list.Remove((VarorModel)listBox.SelectedItem);
         }
@@ -170,6 +142,12 @@ namespace ShoppingLibrary
                 }
             }
             return model;
+        }
+
+        //Calculate sum
+        public static decimal Sum(List<VarorModel> list)
+        {
+           return list.Sum(x => x.Price);
         }
 
 

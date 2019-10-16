@@ -24,13 +24,10 @@ namespace WPFUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static ObservableCollection<VarorModel> obsList = new ObservableCollection<VarorModel>();
-        private static BindingList<VarorModel> bindingList = new BindingList<VarorModel>();
-
+       
         public MainWindow()
         {
             InitializeComponent();
-            varorListBox.ItemsSource = bindingList;
         }
 
         private void AddVaraButton_Click(object sender, RoutedEventArgs e)
@@ -40,44 +37,38 @@ namespace WPFUI
 
             if (inmatning)
             {
-                var model = VarorProcessor.AddVara(bindingList, varansNamnTextBox.Text, varansPrisTextBox.Text);
-
-                //for (int i = 0; i < bindingList.Count-1; i++)
-                //{
-                //    if ((varorListBox.Items[i] as VarorModel).Name.ToLower() == varansNamnTextBox.Text.ToLower())
-                //    {
-                //        (varorListBox.Items[i] as VarorModel).Price = int.Parse(varansPrisTextBox.Text);
-                //    }
-                //}
-                DataBinding();
+                VarorProcessor.AddVara(VarorModel.listOfVaror, varansNamnTextBox.Text, varansPrisTextBox.Text);
+                DataBinding(VarorModel.listOfVaror);
                 ClearTextFields(varansNamnTextBox, varansPrisTextBox);
-                var newList = bindingList.Where(x => x.Price > 0);
+                var newList = VarorModel.listOfVaror.Where(x => x.Price > 0);
                 varorListBox.ItemsSource = newList;
             }
         }
 
         private void DeleteVara_Click(object sender, RoutedEventArgs e)
         {
-            VarorProcessor.DeleteVara(bindingList, varorListBox);
-            DataBinding();
+            VarorProcessor.DeleteVara(VarorModel.listOfVaror, varorListBox);
+            DataBinding(VarorModel.listOfVaror);
+            var newList = VarorModel.listOfVaror.Where(x => x.Price > 0);
+            varorListBox.ItemsSource = newList;
         }
 
-        public void ClearTextFields(TextBox a, TextBox b)
+        private void ClearTextFields(TextBox a, TextBox b)
         {
             a.Text = "";
             b.Text = "";
         }
 
-        public void DataBinding()
+        private void DataBinding(List<VarorModel> list)
         {
-            varorListBox.ItemsSource = bindingList;
+            varorListBox.ItemsSource =list;
             varorListBox.DisplayMemberPath = "Display";
 
-            var mostExpensive = VarorProcessor.MostExpensive(bindingList);
+            var mostExpensive = VarorProcessor.MostExpensive(list);
             dyrasteVara.Text = $"{mostExpensive.Name} - Pris: {mostExpensive.Price} kr";
-            var cheapest = VarorProcessor.Cheapest(bindingList);
+            var cheapest = VarorProcessor.Cheapest(list);
             billigasteVara.Text = $"{cheapest.Name} - Pris: {cheapest.Price} kr";
-            summaTextBox.Text = $"{bindingList.Sum(x => x.Price).ToString()} kr";
+            summaTextBox.Text = $"{VarorProcessor.Sum(list).ToString()} kr";
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
