@@ -64,9 +64,9 @@ namespace WPFUI
             varorListBox.ItemsSource =list;
             varorListBox.DisplayMemberPath = "Display";
 
-            var mostExpensive = VarorProcessor.MostExpensive(list);
+            var mostExpensive = VarorProcessor.MostExpensiveModel(list);
             dyrasteVara.Text = $"{mostExpensive.Name} - Pris: {mostExpensive.Price} kr";
-            var cheapest = VarorProcessor.Cheapest(list);
+            var cheapest = VarorProcessor.CheapestModel(list);
             billigasteVara.Text = $"{cheapest.Name} - Pris: {cheapest.Price} kr";
             summaTextBox.Text = $"{VarorProcessor.Sum(list).ToString()} kr";
         }

@@ -101,11 +101,11 @@
             // billigasteVaranLabel
             // 
             this.billigasteVaranLabel.AutoSize = true;
-            this.billigasteVaranLabel.Location = new System.Drawing.Point(33, 439);
+            this.billigasteVaranLabel.Location = new System.Drawing.Point(33, 477);
             this.billigasteVaranLabel.Name = "billigasteVaranLabel";
-            this.billigasteVaranLabel.Size = new System.Drawing.Size(82, 13);
+            this.billigasteVaranLabel.Size = new System.Drawing.Size(81, 13);
             this.billigasteVaranLabel.TabIndex = 9;
-            this.billigasteVaranLabel.Text = "Billigaste Varan:";
+            this.billigasteVaranLabel.Text = "Billigaste varan:";
             // 
             // dyrasteVaranLabel
             // 
@@ -132,15 +132,15 @@
             this.dyrasteListBox.FormattingEnabled = true;
             this.dyrasteListBox.Location = new System.Drawing.Point(156, 397);
             this.dyrasteListBox.Name = "dyrasteListBox";
-            this.dyrasteListBox.Size = new System.Drawing.Size(143, 17);
+            this.dyrasteListBox.Size = new System.Drawing.Size(143, 43);
             this.dyrasteListBox.TabIndex = 11;
             // 
             // billigasteListBox
             // 
             this.billigasteListBox.FormattingEnabled = true;
-            this.billigasteListBox.Location = new System.Drawing.Point(156, 439);
+            this.billigasteListBox.Location = new System.Drawing.Point(156, 473);
             this.billigasteListBox.Name = "billigasteListBox";
-            this.billigasteListBox.Size = new System.Drawing.Size(143, 17);
+            this.billigasteListBox.Size = new System.Drawing.Size(143, 43);
             this.billigasteListBox.TabIndex = 12;
             // 
             // krLabel
@@ -193,7 +193,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 493);
+            this.ClientSize = new System.Drawing.Size(329, 552);
             this.Controls.Add(this.krlabel2);
             this.Controls.Add(this.summaListBox);
             this.Controls.Add(this.summaLabel);

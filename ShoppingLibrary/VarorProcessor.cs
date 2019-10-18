@@ -51,30 +51,34 @@ namespace ShoppingLibrary
         }
 
         //Calculate most expensive vara
-        public static VarorModel MostExpensive(List<VarorModel> list)
+        public static List<VarorModel> MostExpensive(List<VarorModel> list)
         {
             decimal maxPrice = 0;
-            VarorModel model = new VarorModel("Tom lista", 0);
+            
+            List<VarorModel> tomLista = new List<VarorModel>();
+            List<VarorModel> mostExpensiveList = new List<VarorModel>();
+            VarorModel model = new VarorModel();
+            tomLista.Add(new VarorModel("Tom lista", 0));
             try
             {
                 maxPrice = list.Max(t => t.Price);
             }
             catch (Exception)
             {
-                return model;
+                return tomLista;
             }
 
             for (int i = 0; i < list.Count; i++)
             {
                 if (list[i].Price == maxPrice)
                 {
-                    model = list[i];
+                    mostExpensiveList.Add(list[i]);
                 }
             }
-            return model;
+            return mostExpensiveList;
 
         }
-        public static VarorModel MostExpensive(BindingList<VarorModel> list)
+        public static VarorModel MostExpensiveModel(List<VarorModel> list)
         {
             decimal maxPrice = 0;
             VarorModel model = new VarorModel("Tom lista", 0);
@@ -99,29 +103,33 @@ namespace ShoppingLibrary
         }
 
         //Calculate cheapest vara
-        public static VarorModel Cheapest(List<VarorModel> list)
+        public static List<VarorModel> Cheapest(List<VarorModel> list)
         {
             decimal minPrice = 0;
-            VarorModel model = new VarorModel("Tom lista", 0);
+            List<VarorModel> emptyList = new List<VarorModel>();
+            List<VarorModel> cheapestList = new List<VarorModel>();
+            VarorModel model = new VarorModel();
+            emptyList.Add(new VarorModel("Tom lista", 0));
+
             try
             {
                 minPrice = list.Min(t => t.Price);
             }
             catch (Exception)
             {
-                return model;
+                return emptyList;
             }
 
             for (int i = 0; i < list.Count; i++)
             {
                 if (list[i].Price == minPrice)
                 {
-                    model = list[i];
+                    cheapestList.Add(list[i]);
                 }
             }
-            return model;
+            return cheapestList;
         }
-        public static VarorModel Cheapest(BindingList<VarorModel> list)
+        public static VarorModel CheapestModel(List<VarorModel> list)
         {
             decimal minPrice = 0;
             VarorModel model = new VarorModel("Tom lista", 0);
