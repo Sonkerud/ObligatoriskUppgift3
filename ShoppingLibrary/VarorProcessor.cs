@@ -14,29 +14,37 @@ namespace ShoppingLibrary
     {
         public static void AddVara(List<VarorModel> list, string name, string price)
         {
-            VarorModel model = new VarorModel(
-               name,
-               decimal.Parse(price)
-               );
-
-            //Control if new Vara already exists. If it does - update price.
-            var found = list.Any(x => x.Name.ToLower() == model.Name.ToLower());
-
-            for (int i = 0; i < list.Count; i++)
+            bool result = decimal.TryParse(price, out decimal tryPrice);
+            if (!result)
             {
-                if (list[i].Name.ToLower() == model.Name.ToLower())
+                Console.WriteLine("Ange pris: ");
+            }
+            else
+            {
+                VarorModel model = new VarorModel(
+                   name,
+                   decimal.Parse(price)
+                   );
+
+                //Control if new Vara already exists. If it does - update price.
+                var found = list.Any(x => x.Name.ToLower() == model.Name.ToLower());
+
+                for (int i = 0; i < list.Count; i++)
                 {
-                    list[i].Price = model.Price;
+                    if (list[i].Name.ToLower() == model.Name.ToLower())
+                    {
+                        list[i].Price = model.Price;
+                        Console.WriteLine($"Du uppdaterade priset på {model.Name} till {model.Price} kr");
+                    }
+                }
+
+                //If if doesn't exist: Add new Vara.
+                if (!found)
+                {
+                    model.Name = model.Name.First().ToString().ToUpper() + model.Name.Substring(1).ToLower();
+                    list.Add(model);
                 }
             }
-
-            //If if doesn't exist: Add new Vara.
-            if (!found)
-            {
-                model.Name = model.Name.First().ToString().ToUpper() + model.Name.Substring(1).ToLower();
-                list.Add(model);
-            }
-            
 
         }
 
