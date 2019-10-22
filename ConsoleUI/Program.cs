@@ -9,42 +9,61 @@ namespace ConsoleUI
 {
     class Program
     {
-        public static string priceOffVara;
-        public static string nameofVara;
+        public static string priceOfVara;
+        public static string nameOfVara;
         public static string userInput = "Y";
+        public static string userInputToAddMore = "Y";
             
         static void Main(string[] args)
         {
             Console.WriteLine("Din inköpslista. Lägg till vara nedan. Namnge varan 'exit' när du är färdig.");
-            while (userInput != "exit")
+            
+            while (userInputToAddMore == "Y")
             {
-                   userInput = CreateVara();
+                while (userInput != "exit")
+                {
+                    userInput = CreateVara();
+                }
+                DataOutput();
+                Console.WriteLine("\nÖnskar du lägga till fler varor? (Y)es / (N)o");
+                userInputToAddMore = Console.ReadLine();
+                if (userInputToAddMore == "Y")
+                {
+                    Console.Clear();
+                    OutputList();
+                    userInput = "Y";
+                }
             }
-            DataOutput();
         }
 
         public static string CreateVara() 
         {
-            Console.WriteLine("Namn på vara:  ");
-            nameofVara = Console.ReadLine();
-            if (nameofVara != "exit")
+            Console.WriteLine("\nNamn på vara (exit för att avsluta):  ");
+            nameOfVara = Console.ReadLine();
+            if (nameOfVara != "exit")
             {
-                Console.WriteLine("Ange Pris: ");
-                priceOffVara = Console.ReadLine();
-                VarorProcessor.AddVara(VarorModel.listOfVaror, nameofVara, priceOffVara);
+                bool outcomeOfParse = false;
+                while (!outcomeOfParse)
+                {
+                    Console.WriteLine("Ange Pris: ");
+                    priceOfVara = Console.ReadLine();
+                    outcomeOfParse = decimal.TryParse(priceOfVara, out decimal tryPrice);
+                }
+                VarorProcessor.AddVara(VarorModel.listOfVaror, nameOfVara, priceOfVara);
             }
-            return nameofVara;
+            return nameOfVara;
         }
 
         public static void DataOutput()
         {
+            Console.Clear();
             OutputList();
             OutputSumCheapestExpensive();
         }
 
         public static void OutputList()
         {
-            Console.WriteLine("\nDina varor:");
+            Console.WriteLine("Dina varor:");
             foreach (var item in VarorModel.listOfVaror)
             {
                 Console.WriteLine($"{item.Name} Pris: {item.Price}");
@@ -66,7 +85,7 @@ namespace ConsoleUI
             {
                 Console.WriteLine($"{item.Name} - Pris: {item.Price}");
             }
-            Console.ReadLine();
+            
         }
     }
 }

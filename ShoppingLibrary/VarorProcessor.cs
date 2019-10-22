@@ -12,10 +12,12 @@ namespace ShoppingLibrary
 {
     public class VarorProcessor
     {
+        
+
         public static void AddVara(List<VarorModel> list, string name, string price)
         {
-            bool result = decimal.TryParse(price, out decimal tryPrice);
-            if (!result)
+            bool outcomeOfParse = decimal.TryParse(price, out decimal tryPrice);
+            if (!outcomeOfParse)
             {
                 Console.WriteLine("Ange pris: ");
             }
@@ -43,19 +45,23 @@ namespace ShoppingLibrary
                 {
                     model.Name = model.Name.First().ToString().ToUpper() + model.Name.Substring(1).ToLower();
                     list.Add(model);
-                }
+                 }
             }
 
         }
 
+        //Delete vara for WPF-UI
         public static void DeleteVara(List<VarorModel> list, System.Windows.Controls.ListBox listBox)
         {
             list.Remove((VarorModel)listBox.SelectedItem);
+            
         }
 
+        //Delete vara for Windows Forms UI
         public static void DeleteVara(List<VarorModel> list, System.Windows.Forms.ListBox listBox)
         {
             list.Remove((VarorModel)listBox.SelectedItem);
+            
         }
 
         //Calculate most expensive vara
@@ -110,7 +116,7 @@ namespace ShoppingLibrary
 
         }
 
-        //Calculate cheapest vara
+        //Calculate cheapest vara - Return as VarorModel or List<VarorModel>.
         public static List<VarorModel> Cheapest(List<VarorModel> list)
         {
             decimal minPrice = 0;

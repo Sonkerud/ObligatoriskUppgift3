@@ -24,10 +24,12 @@ namespace WPFUI
     /// </summary>
     public partial class MainWindow : Window
     {
-       
+
+
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
         private void AddVaraButton_Click(object sender, RoutedEventArgs e)
@@ -37,7 +39,7 @@ namespace WPFUI
 
             if (inmatning)
             {
-                VarorProcessor.AddVara(VarorModel.listOfVaror, varansNamnTextBox.Text, varansPrisTextBox.Text);
+               VarorProcessor.AddVara(VarorModel.listOfVaror, varansNamnTextBox.Text, varansPrisTextBox.Text);
                 DataBinding(VarorModel.listOfVaror);
                 ClearTextFields(varansNamnTextBox, varansPrisTextBox);
                 var newList = VarorModel.listOfVaror.Where(x => x.Price > 0);
@@ -61,6 +63,7 @@ namespace WPFUI
 
         private void DataBinding(List<VarorModel> list)
         {
+
             varorListBox.ItemsSource =list;
             varorListBox.DisplayMemberPath = "Display";
 
