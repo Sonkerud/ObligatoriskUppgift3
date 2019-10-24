@@ -16,14 +16,7 @@ namespace ShoppingLibrary
 
         public static void AddVara(List<VarorModel> list, string name, string price)
         {
-            bool outcomeOfParse = decimal.TryParse(price, out decimal tryPrice);
-            if (!outcomeOfParse)
-            {
-                Console.WriteLine("Ange pris: ");
-            }
-            else
-            {
-                VarorModel model = new VarorModel(
+           VarorModel model = new VarorModel(
                    name,
                    decimal.Parse(price)
                    );
@@ -46,7 +39,7 @@ namespace ShoppingLibrary
                     model.Name = model.Name.First().ToString().ToUpper() + model.Name.Substring(1).ToLower();
                     list.Add(model);
                  }
-            }
+            
 
         }
 
