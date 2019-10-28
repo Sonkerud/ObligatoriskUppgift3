@@ -50,6 +50,8 @@ namespace ConsoleUI
                     outcomeOfParse = decimal.TryParse(priceOfVara, out decimal tryPrice);
                 }
                 VarorProcessor.AddVara(VarorModel.listOfVaror, nameOfVara, priceOfVara);
+                Console.Clear();
+                OutputList();
             }
             return nameOfVara;
         }
